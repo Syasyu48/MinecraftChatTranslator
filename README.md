@@ -54,4 +54,5 @@
 https://github.com/ucchyocean/LunaChat
 
 ライセンス
+
 [MIT license](https://github.com/Syasyu48/MinecraftChatTranslator/blob/main/LICENSE)
