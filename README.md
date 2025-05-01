@@ -1,0 +1,2 @@
+# MinecraftChatTranslator
+日本語のローマ字から漢字に変換するMinecraft1.21.4用のSpigotプラグイン
