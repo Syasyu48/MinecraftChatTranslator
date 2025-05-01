@@ -1,0 +1,5 @@
+#file: noinspection PluginYml
+name: MinecraftChatTranslator
+version: 1.0
+main: org.example.MinecraftChatTranslatorPlugin
+api-version: 1.20
