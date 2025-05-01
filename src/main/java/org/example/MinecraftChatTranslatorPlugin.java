@@ -6,21 +6,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
-
 public class MinecraftChatTranslatorPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
         getLogger().info("MinecraftChatTranslatorPluginが有効になりました！");
-        try {
-            GoogleJapaneseConverter.initialize("plugins/MinecraftChatTranslator/credentials.json");
-        } catch (IOException e) {
-            getLogger().log(java.util.logging.Level.SEVERE, "Google翻訳APIの初期化に失敗しました！", e);
         }
-
-    }
 
     @Override
     public void onDisable() {
