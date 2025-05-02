@@ -22,7 +22,7 @@
 ## インストール方法
 
 1. このリポジトリの [Releases](https://github.com/Syasyu48/MinecraftChatTranslator/releases) から `MCT_version.jar` をダウンロード
-2. `MCT.jar` をサーバーの`plugins/`フォルダに入れる
+2. `MCT_version.jar` をサーバーの`plugins/`フォルダに入れる
 3. サーバーを起動
 
 ---
