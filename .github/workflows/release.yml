@@ -63,6 +63,8 @@ jobs:
         with:
           tag_name: ${{ steps.set_version.outputs.NEXT_TAG }}
           name: MCT ${{ steps.set_version.outputs.NEXT_TAG }}
+          body: 初回リリース v1.0.0
+           ローマ字から漢字に変換する機能を実装。
           files: output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
 
       - name: Push tag to repository
