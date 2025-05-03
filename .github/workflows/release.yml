@@ -1,33 +1,70 @@
-name: Release
+name: Build and Release
 
 on:
   push:
-    tags:
-      - 'v*'  # v1.0 のようなタグを push したときに実行
-
-permissions:
-  contents: write  # ← これが必要です
+    branches:
+      - main
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - name: リポジトリをチェックアウト
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Javaをセットアップ
-        uses: actions/setup-java@v3
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'  # 使用しているJavaバージョンに合わせて変更
+          java-version: '21'
 
-      - name: Mavenでビルド
-        run: mvn package --no-transfer-progress
+      - name: Set version
+        id: set_version
+        run: |
+          git fetch --tags
 
-      - name: リリースを作成
+          latest=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
+          if [ -z "$latest" ]; then
+            latest="v0.9.9"  # ← ここを起点にして、次を v1.0.0 にします
+          fi
+
+          version="${latest#v}"
+          IFS='.' read -r major minor patch <<< "$version"
+
+          patch=$((patch + 1))
+          if [ "$patch" -gt 9 ]; then
+            patch=0
+            minor=$((minor + 1))
+          fi
+          if [ "$minor" -gt 9 ]; then
+            minor=0
+            major=$((major + 1))
+          fi
+
+          next_tag="v$major.$minor.$patch"
+          echo "NEXT_TAG=$next_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      - name: Rename JAR
+        run: |
+          mkdir output
+          cp target/*-shaded.jar output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
+
+      - name: Create Release and Upload JAR
         uses: softprops/action-gh-release@v2
         with:
-          files: target/*.jar  # JARのパスを指定
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.set_version.outputs.NEXT_TAG }}
+          name: Release ${{ steps.set_version.outputs.NEXT_TAG }}
+          files: output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
+
+      - name: Push tag to repository
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag ${{ steps.set_version.outputs.NEXT_TAG }}
+          git push origin ${{ steps.set_version.outputs.NEXT_TAG }}
