@@ -62,7 +62,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.set_version.outputs.NEXT_TAG }}
-          name: Release ${{ steps.set_version.outputs.NEXT_TAG }}
+          name: MCT ${{ steps.set_version.outputs.NEXT_TAG }}
           files: output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
 
       - name: Push tag to repository
