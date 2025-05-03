@@ -56,7 +56,7 @@ jobs:
       - name: Rename JAR
         run: |
           mkdir output
-          cp target/*-shaded.jar output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
+          cp target/minecraft-chat-translator-1.0.jar output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
 
       - name: Create Release and Upload JAR
         uses: softprops/action-gh-release@v2
