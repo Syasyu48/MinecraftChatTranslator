@@ -1,9 +1,12 @@
-name: Build and Release
+name: Release
 
 on:
   push:
     tags:
       - 'v*'  # v1.0 のようなタグを push したときに実行
+
+permissions:
+  contents: write  # ← これが必要です
 
 jobs:
   build:
