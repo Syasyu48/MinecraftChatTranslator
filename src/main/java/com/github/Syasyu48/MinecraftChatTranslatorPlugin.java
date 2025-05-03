@@ -1,4 +1,4 @@
-package org.example; // ←あなたのパッケージ名に直す！
+package com.github.Syasyu48; // ←あなたのパッケージ名に直す！
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;

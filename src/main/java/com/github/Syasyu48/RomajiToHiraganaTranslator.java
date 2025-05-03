@@ -1,4 +1,4 @@
-package org.example; // ←ここもあなたのパッケージ名に！
+package com.github.Syasyu48; // ←ここもあなたのパッケージ名に！
 
 import java.util.LinkedHashMap;
 import java.util.Map;
