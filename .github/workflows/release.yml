@@ -58,6 +58,17 @@ jobs:
           mkdir output
           cp target/minecraft-chat-translator-1.0.jar output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
 
+      - name: Check if tag already exists
+        id: check_tag
+        run: |
+          TAG_NAME="v${{ github.ref_name }}"
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG_NAME$"; then
+           echo "Tag $TAG_NAME already exists."
+           echo "skip_release=true" >> $GITHUB_OUTPUT
+          else
+           echo "skip_release=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Create Release and Upload JAR
         uses: softprops/action-gh-release@v2
         with:
