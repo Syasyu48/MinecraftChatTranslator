@@ -28,7 +28,7 @@ jobs:
 
           latest=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
           if [ -z "$latest" ]; then
-            latest="v0.9.9"  # ← ここを起点にして、次を v1.0.0 にします
+            latest="v0.9.9"
           fi
 
           version="${latest#v}"

@@ -1,4 +1,4 @@
-package com.github.Syasyu48; // ←ここもあなたのパッケージ名に！
+package com.github.Syasyu48;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
