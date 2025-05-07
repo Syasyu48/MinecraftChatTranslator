@@ -66,6 +66,7 @@ jobs:
           echo "skip_release=true" >> $GITHUB_ENV
           else
           echo "skip_release=false" >> $GITHUB_ENV
+          fi
 
       - name: Create Release and Upload JAR
         if: env.skip_release == 'false'
