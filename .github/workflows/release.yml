@@ -69,7 +69,7 @@ jobs:
           fi
 
       - name: Create Release and Upload JAR
-        if: env.skip_release == 'false'
+        if: env.skip_release == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.set_version.outputs.NEXT_TAG }}
@@ -80,7 +80,7 @@ jobs:
           files: output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
 
       - name: Push tag to repository
-        if: env.skip_release == 'false'
+        if: env.skip_release == 'true'
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
