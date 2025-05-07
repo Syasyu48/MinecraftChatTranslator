@@ -79,9 +79,12 @@ jobs:
           files: output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
 
       - name: Push tag to repository
-        if: env.skip_release == 'true'
+        if: env.skip_release != 'true'
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git tag ${{ steps.set_version.outputs.NEXT_TAG }}
+          
+          export TAG_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          GIT_COMMITTER_DATE="$TAG_DATE" GIT_AUTHOR_DATE="$TAG_DATE" \
+          git tag -a ${{ steps.set_version.outputs.NEXT_TAG }} -m "Release ${{ steps.set_version.outputs.NEXT_TAG }}"
           git push origin ${{ steps.set_version.outputs.NEXT_TAG }}
