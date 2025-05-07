@@ -69,7 +69,6 @@ jobs:
           fi
 
       - name: Create Release and Upload JAR
-        if: env.skip_release == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.set_version.outputs.NEXT_TAG }}
