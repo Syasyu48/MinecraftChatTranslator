@@ -25,7 +25,7 @@ public class MinecraftChatTranslatorPlugin extends JavaPlugin implements Listene
 
         // ⭐ 「!」で始まる場合はそのまま表示（翻訳なし）
         if (originalMessage.startsWith("!")) {
-            return; // 翻訳せず、チャットはそのまま通す
+            return; // 翻訳しない
         }
 
         String translatedMessage;
