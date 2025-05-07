@@ -79,7 +79,7 @@ jobs:
           files: output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
 
       - name: Push tag to repository
-        if: env.skip_release != 'true'
+        if: env.skip_release == 'true'
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
