@@ -32,8 +32,7 @@ public class MinecraftChatTranslatorPlugin extends JavaPlugin implements Listene
         if (isUrl(originalMessage)) {
             translatedMessage = "";
         } else {
-            String hiragana = RomajiToHiraganaTranslator.translate(originalMessage);
-            translatedMessage = GoogleCGIJapaneseConverter.convert(hiragana);
+            translatedMessage = RomajiToJapaneseConverter.convert(originalMessage);
         }
 
         String formattedMessage = originalMessage + " " + ChatColor.GOLD + "(" + translatedMessage + ")" + ChatColor.RESET;
