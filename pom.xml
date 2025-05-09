@@ -6,7 +6,7 @@
 
     <groupId>com.github.Syasyu48</groupId>
     <artifactId>minecraft-chat-translator</artifactId>
-    <version>1.0.2</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>MinecraftChatTranslator</name>
