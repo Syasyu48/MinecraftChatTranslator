@@ -7,6 +7,7 @@ target/
 *.iml
 qodana.yaml
 qodana_code_quality.yml
+dependency-reduced-pom.xml
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

@@ -74,8 +74,9 @@ jobs:
           tag_name: ${{ steps.set_version.outputs.NEXT_TAG }}
           name: MCT ${{ steps.set_version.outputs.NEXT_TAG }}
           body: |
-            自動リリース
-            ローマ字から漢字に変換する機能を実装。
+            MCT-v1.0.2
+            v1.0.1で行った変更より、変換エラーとなり正常に変換できなくなってしまったため、元のマッピング方式に変更。
+            今後、この部分を弄る予定はなし。
           files: output/MCT-${{ steps.set_version.outputs.NEXT_TAG }}.jar
 
       - name: Push tag to repository

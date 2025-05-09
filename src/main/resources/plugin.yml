@@ -1,5 +1,5 @@
 #file: noinspection PluginYml
-name: MinecraftChatTranslator
-version: 1.0
+name: MCT
+version: 1.0.2
 main: com.github.Syasyu48.MinecraftChatTranslatorPlugin
 api-version: 1.20

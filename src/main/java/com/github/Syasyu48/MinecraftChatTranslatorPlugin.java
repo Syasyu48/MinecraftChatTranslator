@@ -11,12 +11,12 @@ public class MinecraftChatTranslatorPlugin extends JavaPlugin implements Listene
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
-        getLogger().info("MinecraftChatTranslatorPluginが有効になりました！");
+        getLogger().info("MCTが有効になりました！");
         }
 
     @Override
     public void onDisable() {
-        getLogger().info("MinecraftChatTranslatorPluginが無効になりました！");
+        getLogger().info("MCTが無効になりました！");
     }
 
     @EventHandler
@@ -32,7 +32,9 @@ public class MinecraftChatTranslatorPlugin extends JavaPlugin implements Listene
         if (isUrl(originalMessage)) {
             translatedMessage = "";
         } else {
-            translatedMessage = RomajiToJapaneseConverter.convert(originalMessage);
+            String hiragana = RomajiToHiraganaTranslator.translate(originalMessage);
+            translatedMessage = GoogleCGIJapaneseConverter.convert(hiragana);
+
         }
 
         String formattedMessage = originalMessage + " " + ChatColor.GOLD + "(" + translatedMessage + ")" + ChatColor.RESET;
