@@ -1,5 +1,9 @@
 #file: noinspection PluginYml
 name: MCT
-version: 1.0.2
+version: 1.0
 main: com.github.Syasyu48.MinecraftChatTranslatorPlugin
 api-version: 1.20
+commands:
+  mct:
+    description: Toggle translation on or off
+    usage: /<command> toggle

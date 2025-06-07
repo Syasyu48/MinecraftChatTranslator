@@ -5,13 +5,28 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.net.URL;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import org.bukkit.Bukkit;
 import java.nio.charset.StandardCharsets;
 import org.json.JSONArray;
 import org.json.JSONTokener;
 
 public class GoogleCGIJapaneseConverter {
 
+    private static final Map<String, String> CACHE = Collections.synchronizedMap(
+            new LinkedHashMap<>(100, 0.75f, true) {
+                @Override
+                protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
+                    return size() > 100;
+                }
+            });
+
     public static String convert(String kanaText) {
+        if (CACHE.containsKey(kanaText)) {
+            return CACHE.get(kanaText);
+        }
         try {
             String encoded = URLEncoder.encode(kanaText, StandardCharsets.UTF_8);
             String apiUrl = "https://www.google.com/transliterate?langpair=ja-Hira|ja&text=" + encoded;
@@ -32,12 +47,13 @@ public class GoogleCGIJapaneseConverter {
                         result.append(candidates.getString(0)); // 最初の候補だけ連結
                     }
                 }
-
-                return result.toString();
+                String converted = result.toString();
+                CACHE.put(kanaText, converted);
+                return converted;
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Bukkit.getLogger().warning("GoogleCGI conversion failed: " + e.getMessage());
         }
 
         return kanaText;
